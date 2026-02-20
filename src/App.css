@@ -1,0 +1,311 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.app-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.app-sidebar {
+  width: 280px;
+  min-width: 200px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.app-settings {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-settings-toggle {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.app-settings-panel {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.app-settings-token-status {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.app-settings-panel label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.app-settings-panel input {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font-size: 0.875rem;
+}
+
+.app-settings-panel input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.app-settings-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.4;
+}
+
+.app-settings-hint code {
+  font-size: 0.7rem;
+  padding: 0.1em 0.3em;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.app-main {
+  flex: 1;
+  overflow: auto;
+  padding: 0;
+  min-width: 0;
+}
+
+.app-main .swagger-ui {
+  padding: 1rem;
+}
+
+.app-status {
+  padding: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.app-loading {
+  display: inline-block;
+}
+
+.app-error {
+  color: #f87171;
+  text-align: left;
+  max-width: 100%;
+}
+
+.app-error p {
+  word-break: break-word;
+  white-space: pre-wrap;
+  margin: 0 0 0.5rem 0;
+}
+
+.app-error button {
+  margin-top: 0.75rem;
+}
+
+/* DocList */
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.doc-list-add {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.doc-list-add-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.doc-list-input-name {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.doc-list-add input,
+.doc-list-add .doc-list-add-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font-size: 0.875rem;
+}
+
+.doc-list-add input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.doc-list-add input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.doc-list-add .doc-list-add-row button {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+}
+
+.doc-list-item-rename {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-list-item-rename input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+}
+
+.doc-list-item-rename input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.doc-list-item-rename button {
+  padding: 0.35rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.doc-list-error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #f87171;
+}
+
+.doc-list-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.doc-list-items li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  padding: 0.25rem 0;
+}
+
+.doc-list-items li.selected {
+  background: rgba(100, 108, 255, 0.2);
+}
+
+.doc-list-item-label {
+  flex: 1;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+}
+
+.doc-list-item-actions {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.doc-list-item-actions button {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.doc-list-empty {
+  margin: 0;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (prefers-color-scheme: light) {
+  .app-header {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+  }
+  .app-sidebar {
+    border-right-color: rgba(0, 0, 0, 0.1);
+  }
+  .app-settings {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+  }
+  .app-settings-toggle {
+    background: rgba(0, 0, 0, 0.04);
+  }
+  .app-settings-token-status {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .app-settings-panel label {
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .app-settings-panel input {
+    border-color: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .app-settings-hint {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .app-settings-hint code {
+    background: rgba(0, 0, 0, 0.08);
+  }
+  .doc-list-add input {
+    border-color: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .doc-list-add input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  .doc-list-item-rename input {
+    border-color: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .doc-list-items li.selected {
+    background: rgba(100, 108, 255, 0.15);
+  }
+  .app-status {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .app-error {
+    color: #dc2626;
+  }
+}
