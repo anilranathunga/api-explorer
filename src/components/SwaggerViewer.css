@@ -3,11 +3,18 @@
    default theme is not overridden by inherited color/background. */
 
 .swagger-viewer-wrap {
-  min-height: 100%;
   padding: 1rem;
   /* Match Swagger UI default context so app theme doesn’t inherit into the viewer */
   background: #fff;
   color: #3b4151;
+  /* Let content determine height so Schemas section at bottom is visible; .app-main scrolls */
+  min-height: min-content;
+  overflow: visible;
+}
+
+/* Ensure Swagger UI root doesn’t clip; fixes Schemas section in Chrome */
+.swagger-viewer-wrap .swagger-ui {
+  overflow: visible;
 }
 
 .swagger-viewer-wrap.swagger-viewer-placeholder {

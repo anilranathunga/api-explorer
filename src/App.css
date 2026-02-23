@@ -29,6 +29,10 @@
   padding: 1rem;
   overflow-y: auto;
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  max-height: 100vh;
 }
 
 .app-settings {
@@ -243,6 +247,7 @@
   display: flex;
   gap: 0.25rem;
   flex-shrink: 0;
+  align-items: center;
 }
 
 .doc-list-item-actions button {
@@ -250,10 +255,91 @@
   font-size: 0.8rem;
 }
 
+.doc-list-item-action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  min-width: 1.75rem;
+  min-height: 1.75rem;
+}
+
+.doc-list-item-action-icon svg {
+  display: block;
+}
+
 .doc-list-empty {
   margin: 0;
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.5);
+}
+
+/* Sections (tags) menu – scroll to section in the doc */
+.app-tags-menu {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-tags-menu-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.app-tags-menu-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+}
+
+.app-tags-menu-search::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.app-tags-menu-search:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.app-tags-menu-hint {
+  margin: 0.35rem 0 0 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.app-tags-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.app-tags-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.app-tags-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 @media (prefers-color-scheme: light) {
@@ -298,6 +384,30 @@
   }
   .doc-list-items li.selected {
     background: rgba(100, 108, 255, 0.15);
+  }
+  .app-tags-menu {
+    border-top-color: rgba(0, 0, 0, 0.1);
+  }
+  .app-tags-menu-title {
+    color: rgba(0, 0, 0, 0.85);
+  }
+  .app-tags-menu-search {
+    border-color: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .app-tags-menu-search::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  .app-tags-menu-hint {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .app-tags-menu-item {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+  .app-tags-menu-item:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.25);
   }
   .app-status {
     color: rgba(0, 0, 0, 0.6);

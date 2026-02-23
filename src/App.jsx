@@ -1,8 +1,28 @@
 import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react'
+import yaml from 'js-yaml'
 import { loadDocs, saveDocs, loadToken, saveToken } from './lib/storage'
 import { fetchYamlFromGitHub } from './lib/github'
 import DocList from './components/DocList'
 import './App.css'
+
+/** Extract tag names from OpenAPI/Swagger spec for the sections menu */
+function extractTagsFromSpec(spec) {
+  if (!spec || typeof spec !== 'object') return []
+  const fromTop = Array.isArray(spec.tags)
+    ? spec.tags.map((t) => (typeof t === 'string' ? t : t?.name)).filter(Boolean)
+    : []
+  const fromPaths = new Set()
+  const paths = spec.paths || {}
+  for (const ops of Object.values(paths)) {
+    if (!ops || typeof ops !== 'object') continue
+    for (const op of Object.values(ops)) {
+      if (op && Array.isArray(op.tags)) op.tags.forEach((t) => fromPaths.add(t))
+    }
+  }
+  const order = fromTop.length ? fromTop : [...fromPaths]
+  fromPaths.forEach((t) => { if (!order.includes(t)) order.push(t) })
+  return order
+}
 
 const SwaggerViewer = lazy(() => import('./components/SwaggerViewer'))
 
@@ -16,6 +36,8 @@ export default function App() {
   const [error, setError] = useState(null)
   const [token, setToken] = useState(() => loadToken() || ENV_TOKEN)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [apiTags, setApiTags] = useState([])
+  const [sectionSearch, setSectionSearch] = useState('')
   const selectedIdRef = useRef(selectedId)
   selectedIdRef.current = selectedId
 
@@ -82,6 +104,27 @@ export default function App() {
     loadDoc(id)
   }
 
+  useEffect(() => {
+    if (!fetchedYaml) {
+      setApiTags([])
+      setSectionSearch('')
+      return
+    }
+    setSectionSearch('')
+    try {
+      const parsed = typeof fetchedYaml === 'string' ? yaml.load(fetchedYaml) : fetchedYaml
+      setApiTags(extractTagsFromSpec(parsed || {}))
+    } catch {
+      setApiTags([])
+    }
+  }, [fetchedYaml])
+
+  const scrollToTag = useCallback((tagName) => {
+    const id = `operations-tag-${tagName}`
+    const el = document.getElementById(id) || document.querySelector(`[data-tag="${tagName}"]`)
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [])
+
   return (
     <div className="app">
       <header className="app-header">
@@ -132,6 +175,44 @@ export default function App() {
             onSelect={setSelectedId}
             onRefresh={handleRefresh}
           />
+          {apiTags.length > 0 && (
+            <div className="app-tags-menu">
+              <h3 className="app-tags-menu-title">Sections</h3>
+              <input
+                type="search"
+                className="app-tags-menu-search"
+                placeholder="Search sections…"
+                value={sectionSearch}
+                onChange={(e) => setSectionSearch(e.target.value)}
+                aria-label="Filter sections"
+              />
+              <ul className="app-tags-menu-list" aria-label="API sections">
+                {apiTags
+                  .filter((tag) =>
+                    tag.toLowerCase().includes(sectionSearch.trim().toLowerCase())
+                  )
+                  .map((tag) => (
+                    <li key={tag}>
+                      <button
+                        type="button"
+                        className="app-tags-menu-item"
+                        onClick={() => scrollToTag(tag)}
+                      >
+                        {tag}
+                      </button>
+                    </li>
+                  ))}
+              </ul>
+              {sectionSearch.trim() && (
+                <p className="app-tags-menu-hint">
+                  {apiTags.filter((t) =>
+                    t.toLowerCase().includes(sectionSearch.trim().toLowerCase())
+                  ).length}{' '}
+                  of {apiTags.length} sections
+                </p>
+              )}
+            </div>
+          )}
         </aside>
         <main className="app-main">
           {loading && (

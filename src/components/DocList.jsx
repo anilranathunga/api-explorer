@@ -138,14 +138,20 @@ export default function DocList({ docs, setDocs, selectedId, onSelect, onRefresh
                   {displayName(doc)}
                 </button>
                 <div className="doc-list-item-actions">
-                  <button type="button" onClick={() => { setEditingId(doc.id); setEditingName(doc.name ?? ''); }} title="Rename">
+                  <button type="button" onClick={() => { setEditingId(doc.id); setEditingName(doc.name ?? ''); }} title="Rename" className="doc-list-item-action-text">
                     Rename
                   </button>
-                  <button type="button" onClick={() => onRefresh(doc.id)} title="Refresh">
-                    Refresh
+                  <button type="button" onClick={() => onRefresh(doc.id)} title="Refresh" className="doc-list-item-action-icon" aria-label="Refresh">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M21 12a9 9 0 1 1-2.6-6.4" />
+                      <path d="M21 3v6h-6" />
+                    </svg>
                   </button>
-                  <button type="button" onClick={() => handleRemove(doc.id)} title="Remove">
-                    Remove
+                  <button type="button" onClick={() => handleRemove(doc.id)} title="Remove" className="doc-list-item-action-icon" aria-label="Remove">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M18 6 6 18" />
+                      <path d="m6 6 12 12" />
+                    </svg>
                   </button>
                 </div>
               </>

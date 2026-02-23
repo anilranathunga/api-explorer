@@ -32,7 +32,11 @@ function SwaggerViewer({ spec }) {
   }
   return (
     <div className="swagger-viewer-wrap">
-      <SwaggerUI spec={spec} />
+      <SwaggerUI
+        spec={spec}
+        defaultModelsExpandDepth={1}
+        docExpansion="list"
+      />
     </div>
   )
 }
